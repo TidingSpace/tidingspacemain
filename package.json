@@ -1,0 +1,35 @@
+{
+  "name": "tiding-space",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "mapbox-gl": "^3.7.0",
+    "web-push": "^3.6.7",
+    "@sentry/nextjs": "^10.69.0",
+    "posthog-js": "^1.413.3",
+    "posthog-node": "^5.48.1",
+    "next": "14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/mapbox-gl": "^3.4.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/web-push": "^3.6.4",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^6.0.4",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.10"
+  }
+}

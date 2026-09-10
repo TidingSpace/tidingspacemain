@@ -1,0 +1,83 @@
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Stops the whole page from rubber-banding/bouncing past its edges —
+     one of the most common things that visually gives away "this is a
+     website in a browser," not an installed app. Individual scrollable
+     panes (chat, feed, etc.) keep their own natural scroll/momentum;
+     this only stops the outer page itself from bouncing. */
+  overscroll-behavior-y: none;
+}
+
+/* Buttons and nav items shouldn't let a long-press trigger the browser's
+   own text-selection/callout menu the way a paragraph of text should —
+   that's one of the fastest ways a tap-heavy interface feels like a
+   webpage instead of an app. Text content (post text, messages, bios)
+   deliberately isn't touched by this, so people can still select and
+   copy their own words normally. */
+button, a, nav, [role="button"] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+.ts-typing-dot:nth-child(1) { animation: typingDot 1.1s ease-in-out infinite; }
+.ts-typing-dot:nth-child(2) { animation: typingDot 1.1s ease-in-out infinite 0.15s; }
+.ts-typing-dot:nth-child(3) { animation: typingDot 1.1s ease-in-out infinite 0.3s; }
+
+/* Every button/link in the app gets a smooth, consistent feel by default —
+   instead of relying on each screen to remember to add its own transition,
+   this covers every interactive element at once. Anything that already sets
+   its own transition (e.g. a specific hover color) still works exactly as
+   before; this only fills in the gaps. */
+button, a {
+  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent; /* replace the browser's default gray/blue tap flash with our own :active feedback below */
+}
+button:active, a:active {
+  opacity: 0.85;
+}
+
+/* Buttons inherit the app's font by default — a plain <button> without an
+   explicit fontFamily would otherwise silently render in the browser's UI
+   font instead of the app's, a subtle inconsistency easy to introduce by
+   accident and easy to prevent once, here. */
+button {
+  font-family: inherit;
+}
+
+/* Shared entrance animation for list items (posts, notifications, etc.) —
+   defined once here rather than duplicated as a local <style> tag inside
+   every component that renders a list, since those get remounted per item. */
+@keyframes tsFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ts-fade-in {
+  animation: tsFadeIn 200ms ease;
+}
+
+/* A consistent, on-brand focus ring for keyboard navigation, instead of each
+   browser's own default outline color/style. Only shows for keyboard focus
+   (:focus-visible), not for mouse/touch taps, so it doesn't add a visible
+   ring to every button press on desktop. */
+:focus-visible {
+  outline: 2px solid #7A5AF8;
+  outline-offset: 2px;
+}
